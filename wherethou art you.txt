@@ -3,14 +3,35 @@ function whatIsInAName(collection, source) {
 
   function checkAllObjects(source, toCheck) {
     var count = 0;
-    var arr1 = []
-    var arr2 = []
- 
+  
+  if (Object.keys(source).length == 1) {
+  for (let p in toCheck) {
+          for (let suche in source) {       
+              if (source[suche] == toCheck[p]) {
+                 if (arr.indexOf(toCheck) == -1) { 
+                    arr.push(toCheck)
+                 }
+             
+              }
+          }
+      }
+  } else {
+
   for (let s in source) {
     if (toCheck.hasOwnProperty(s)) {
+      
     count++
       }
     }
+    //check values
+    var value_check = true;
+var a = Object.values(source)
+var b = Object.values(toCheck)
+
+
+  for (var j = 0; j < b.length; j++) {
+
+  }
 
     if (count == (Object.keys(source)).length) { //if each element from source was found in toCheck
       if (arr.indexOf(toCheck) == -1) {
@@ -20,10 +41,16 @@ function whatIsInAName(collection, source) {
     }
   }
 
+  }
+
+
+
+
   for (var property in collection) {
     if (collection.hasOwnProperty(property)) {     
       var item = collection[property] //item represents each object
        for (var p in item) {
+         
        checkAllObjects(source, item)
        }
     }
@@ -33,4 +60,4 @@ return arr;
   
 }
 
-console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }))
+console.log(whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3}))
