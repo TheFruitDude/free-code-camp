@@ -1,0 +1,30 @@
+function translatePigLatin(str) {
+
+  function isVovel(input) {
+   var reg = /[aeiou]/g;
+   if (input.match(reg) === null) {
+    return false
+   } else {
+    return input.match(reg)
+    }
+  }
+
+  function removeFirst_thenAdd(o) {
+    let zwischenspeicher =  o[0]
+   o =  o.replace(zwischenspeicher, "")
+   o = o + zwischenspeicher
+   return o
+   
+  }
+
+
+
+if (isVovel(removeFirst_thenAdd(str))) {
+
+} else {
+
+}
+  
+}
+
+translatePigLatin("consonant");
