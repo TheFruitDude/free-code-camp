@@ -1,0 +1,51 @@
+function smallestCommons(arr) {
+
+function getmin(arr) {
+  return Math.min.apply(Math, arr);
+}
+function getmax(arr) {
+   return Math.max.apply(Math, arr);
+}
+function divisor(arr) {
+  var max = getmax(arr);
+  var min = getmin(arr);
+  var a = [];
+  for (var i = 0; i< (max-min+1); i++) {
+    a.push(getmin(arr)+i)
+  }
+  return a; //returns [1,2,3,4,5];
+}
+const div = divisor(arr)
+function checkIFWORKS(num, arra) {
+  ; //gets alle elemente die zwischen den beiden Zahlen in input array liegen [1,2,3,4,5]
+ // for (var j = 0; j< div.length; j++) {
+ //   console.log(div[j]);
+ // }
+  for (var i = 0; i< div.length; i++) {
+    
+    if (num % div[i] !== 0) {
+      return false; //geteilt durch jeden divisor muss eine zahl ohne rest geben
+    }
+  }
+  return true;
+
+//num = multiple vo 1,2,3,4,5
+//num / jeden divisor muss ohne rest aufgehen
+
+
+
+}
+
+var num = getmax(arr); //fängt mit der höchsten Zahl an $
+ 
+
+while (checkIFWORKS(num, arr) == false) {
+ 
+  num = num + 1;
+//try it with brute force.
+//increase the number everytime by 1 and check if it can divide witout remainder for each of the divisors
+}
+return num;
+}
+console.log(smallestCommons([23, 18]));
+
