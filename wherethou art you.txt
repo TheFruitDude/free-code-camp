@@ -29,8 +29,16 @@ var a = Object.values(source)
 var b = Object.values(toCheck)
 
 
-  for (var j = 0; j < b.length; j++) {
-
+  for (var j = 0; j < a.length; j++) {
+    var c = 0;
+     for (var i = 0; i < b.length; i++) { 
+       if (a[j] !== b[i]) {
+         c++
+         if (c== 3) {
+           return
+         }
+       }
+     }
   }
 
     if (count == (Object.keys(source)).length) { //if each element from source was found in toCheck
