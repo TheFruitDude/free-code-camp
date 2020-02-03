@@ -1,0 +1,36 @@
+function whatIsInAName(collection, source) {
+  var arr = []
+
+  function checkAllObjects(source, toCheck) {
+    var count = 0;
+    var arr1 = []
+    var arr2 = []
+ 
+  for (let s in source) {
+    if (toCheck.hasOwnProperty(s)) {
+    count++
+      }
+    }
+
+    if (count == (Object.keys(source)).length) { //if each element from source was found in toCheck
+      if (arr.indexOf(toCheck) == -1) {
+  
+        arr.push(toCheck)
+      }   
+    }
+  }
+
+  for (var property in collection) {
+    if (collection.hasOwnProperty(property)) {     
+      var item = collection[property] //item represents each object
+       for (var p in item) {
+       checkAllObjects(source, item)
+       }
+    }
+  }
+return arr;
+
+  
+}
+
+console.log(whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }))
