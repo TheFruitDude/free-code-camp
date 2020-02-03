@@ -1,0 +1,21 @@
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  function doLoop(s) {
+    for 
+  }
+  if (str.includes('_')) {
+       let b = str.split('_').join("-")
+       b = b.toLowerCase()
+       return b;
+  }
+  if (str.includes(' ')) {
+     let b = str.split(' ').join("-")
+     b = b.toLowerCase()
+     return b;
+  } else {
+    doLoop(str)
+  }
+}
+
+console.log(spinalCase('This Is Spinal Tap'));
