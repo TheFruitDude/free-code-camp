@@ -1,0 +1,63 @@
+<script>
+function sort(a) {
+	var sorted = [];
+	var sorted = arr.sort(function(a, b) {
+    return a - b;
+  });
+}
+
+function getDivisors(list) { 
+//input is [1, 4 ], returns for ex. [1,2,3,4]
+var return_Array = [];
+var r = list[0];
+	do  {
+    	if ( r == list[0]) { //only first time
+        return_Array.push(r);
+        } else { 
+        r += 1;
+        return_Array.push(r);
+        document.write(return_Array[r]);
+        }
+	} while (r !== list[list.length-1])
+	return return_Array;
+}
+
+function kGV()  {
+var sorted = sort(arr);
+var alleZahlen; // ist ein Array mit Zahlen von zb 1,2,4,5
+
+
+  var lastElement = sorted[sorted.length-1];
+  var firstElement = sorted[0];
+  //could also use Math.max and Math.min but I did it that way
+  var diff = lastElement - firstElement -1; 
+  //this should return a positive number, assuming no Array alements are negative
+
+
+var c = 0;
+if (firstElement == 1) {
+		//wenn array like [1, 5] its 5!
+		c = fakultät(lastElement);
+	} else {
+		//when array like  [5, 10] it's 10!/5!
+        c = (fakultät(lastElement)/fakultät(firstElement));
+	}
+}
+
+
+
+function fakultät(num)
+{
+    if (num === 0)
+      { return 1; }
+    else
+      { return num * rFact( num - 1 ); }
+}
+
+
+
+//kGV([1,5]);
+document.write(getDivisors([1,5]));
+
+</script>
+
