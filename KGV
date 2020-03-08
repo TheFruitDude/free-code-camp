@@ -36,7 +36,7 @@ function checkIFWORKS(num, arra) {
 
 }
 
-var num = getmax(arr); //fängt mit der höchsten Zahl an $
+var num = getmax(arr); //fÃ¤ngt mit der hÃ¶chsten Zahl an $
  
 
 while (checkIFWORKS(num, arr) == false) {
