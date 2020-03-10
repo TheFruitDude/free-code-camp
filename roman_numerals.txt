@@ -1,0 +1,37 @@
+var decimal = [ "1","2","3","4","5","6","7","8","9","10", "50", "100", "1000" ]
+
+var roman = [ "I","II","III","IV","V","VI","VII","VIII","IX","X", "L", "C", "M" ]
+
+function einerTOROMAN(toconvert) { //input is of type string
+  return roman[(decimal.indexOf(toconvert))]
+}
+
+function zehnerTOROMAN(toconvert) {
+    if (toconvert.length == 1) {
+        if (toconvert == "5") return "L"
+        if (toconvert == "1") return "X"
+    }
+}
+
+function convertToRoman(num) {
+  var toconvert = num.toString(10)
+  var zehner = toconvert.substring(1,2);
+  var einer = toconvert.substring(0,1);
+
+    einer = einerTOROMAN(einer)
+    zehner = zehnerTOROMAN(zehner)
+
+  
+  if (toconvert.length == 1) {
+      return einer
+  } else {
+
+  return zehner + einer;
+      
+  }
+}
+  
+
+console.log(convertToRoman(12));
+
+
