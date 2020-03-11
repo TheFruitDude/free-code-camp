@@ -1,0 +1,30 @@
+
+
+function sumFibs(num) {
+   function isOdd(input) {
+   if (input % 2 !== 0) return true
+   else return false;
+ }
+
+  //first make Array of all fiobonacci
+
+  var summe =0
+  let arr = [0, 1]; //this is fix defined
+  for (let i = 2; i < num + 1; i++){
+    arr.push(arr[i - 2] + arr[i -1])
+  }
+ arr.forEach( (el) => {
+   if (isOdd(el) && el <= num) {
+     summe += el
+   }
+ })
+return summe
+
+  }
+
+
+
+sumFibs(1000);
+
+
+//0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
