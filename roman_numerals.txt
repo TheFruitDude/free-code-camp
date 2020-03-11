@@ -1,37 +1,92 @@
-var decimal = [ "1","2","3","4","5","6","7","8","9","10", "50", "100", "1000" ]
+var decimal = [ "1","2","3","4","5","6","7","8","9","10", "50", "100", "500", "1000" ]
 
-var roman = [ "I","II","III","IV","V","VI","VII","VIII","IX","X", "L", "C", "M" ]
+var roman = [ "I","II","III","IV","V","VI","VII","VIII","IX","X", "L", "C", "D", "M" ]
 
-function einerTOROMAN(toconvert) { //input is of type string
-  return roman[(decimal.indexOf(toconvert))]
+function einerTOROMAN(toconvert) { 
+//typeOf toconvert == string. Now simply return the element of the Roman Number Array which has the same index:
+if (toconvert == "0") return ""
+  return roman[(decimal.indexOf(toconvert))] 
 }
 
-function zehnerTOROMAN(toconvert) {
-    if (toconvert.length == 1) {
-        if (toconvert == "5") return "L"
-        if (toconvert == "1") return "X"
-    }
+function zehnerTOROMAN(toconvert) {
+   
+    if (toconvert.length == 1) {
+        if (toconvert == "0") return "";
+        if (toconvert == "1") return "X"
+        if (toconvert == "2") return "XX"
+        if (toconvert == "3") return "XXX"
+        if (toconvert == "4") return "XL"
+        if (toconvert == "5") return "L"
+        if (toconvert == "6") return "LX"
+        if (toconvert == "7") return "LXX"
+        if (toconvert == "8") return "LXXX"
+        if (toconvert == "9") return "XC"
+    }
+}
+function hunderterTOROMAN(toconvert) {
+        if (toconvert == "0") return "";
+        if (toconvert == "1") return "C"
+        if (toconvert == "2") return "CC"
+        if (toconvert == "3") return "CCC"
+        if (toconvert == "4") return "CD"
+        if (toconvert == "5") return "D"
+        if (toconvert == "6") return "DC"
+        if (toconvert == "7") return "DCC"
+        if (toconvert == "8") return "DCCC"
+        if (toconvert == "9") return "CM"
+}
+function tausenderTOROMAN(toconvert) {
+        if (toconvert == "1") return "M"
+        if (toconvert == "2") return "MM"
+        if (toconvert == "3") return "MMM"
 }
 
-function convertToRoman(num) {
-  var toconvert = num.toString(10)
-  var zehner = toconvert.substring(1,2);
-  var einer = toconvert.substring(0,1);
+function convertToRoman(num) {
+  var toconvert = num.toString(10)
 
-    einer = einerTOROMAN(einer)
-    zehner = zehnerTOROMAN(zehner)
+  var arr = []
+  var zehner = undefined;
+  var einer  = undefined;
+  var hunderter = undefined;
+  var tausender = undefined;
 
-  
-  if (toconvert.length == 1) {
-      return einer
-  } else {
-
-  return zehner + einer;
-      
-  }
+  arr = toconvert.split('')
+  if (arr.length == 1){
+    einer = toconvert
+    einer = einerTOROMAN(einer) 
+    return einer
+  } 
+    if (arr.length == 2) {
+        einer = arr[1]
+        zehner = arr[0]
+        zehner = zehnerTOROMAN(zehner)
+        einer = einerTOROMAN(einer) 
+        return zehner + einer;
+    }
+    if (arr.length == 3) {
+        einer = arr[2]
+        zehner = arr[1]
+        hunderter = arr[0]
+        zehner = zehnerTOROMAN(zehner)
+        einer = einerTOROMAN(einer) 
+        hunderter = hunderterTOROMAN(hunderter)
+   
+        return hunderter + zehner + einer;
+    }
+    if (arr.length == 4) {
+        einer = arr[3]
+        zehner = arr[2]
+        hunderter = arr[1]
+        tausender = arr[0]
+        zehner = zehnerTOROMAN(zehner)
+        einer = einerTOROMAN(einer) 
+        hunderter = hunderterTOROMAN(hunderter)
+        tausender = tausenderTOROMAN(tausender)
+    return tausender + hunderter + zehner + einer;
+    }
+ 
 }
-  
 
-console.log(convertToRoman(12));
+console.log(convertToRoman(400));
 
 
