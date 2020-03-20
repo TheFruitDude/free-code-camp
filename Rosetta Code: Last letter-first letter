@@ -1,0 +1,49 @@
+function findLongestChain(items) {
+  var chain =[] //tried words up until now
+  var used = [] // used words for current chain
+  
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+//simple brute force approach
+// just try each permutation ( combination is the wrong word, because it does not care about the order of the elements)
+
+var masterArray = []
+
+
+for (let i = 0; i < 7; i++) { 
+ for (let j = 0; j < 7; j++) { 
+  for (let h = 0; h < 7; h++) { 
+    for (let k = 0; k < 7; k++) { 
+      for (let c = 0; c < 7; c++) { 
+        for (let y = 0; y < 7; y++) { 
+          for (let q = 0; q < 7; q++) { 
+
+            }
+          } 
+        }
+      }
+    }
+  }
+}
+
+
+
+  function last_equal_first(first_word, second_word) {
+    let arr = first_word.split('')
+    let lastLetter = arr[arr.length - 1]
+    arr = second_word.split('')
+    let firstLetter = arr[0]
+
+    if (firstLetter == last_equal_first) return true;
+    else return false;
+  }
+
+  // Good luck!
+}
+
+findLongestChain(["certain", "each", "game", "involves", "starting", "with", "word"])
+
