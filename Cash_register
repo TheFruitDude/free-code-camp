@@ -1,15 +1,33 @@
 function checkCashRegister(price, cash, cid) {
 
   var diff = cash - price
-  var status = insufficent(diff, cid)
   var sum = sum_Cash(diff, cid)
+  var status = getStatus(diff, sum)
+  console.log(status)
+
   var arr = makeArr(cid)
   var bool = fits(0.25, diff, cid)
   var passt_rein = []
-  console.log(arr)
+ 
  
   var removedCID = removeValueOfNote_in_cid(0.25, cid)
-  
+
+
+ if (status == "INSUFFICIENT_FUNDS") {
+    passt_rein = []
+  }
+}
+function loopbackwards() {
+    /*pseudecode:
+  for-loop arr backwards {
+    while fits && getValueOfNote_in_cid != 0
+      push test_note to array
+      maybe Math.round
+      subrtact value from array cid
+      subtract value from varialbe diff and assign returned CID to currentCID
+  }
+  console.log(passt_rein)
+  */
 }
 function fits(note, difference, cid) { //checks if value of current note fits in CID value and is less than or equal to diff
   if (note <= difference) {
@@ -44,10 +62,20 @@ function sum_Cash(diff, c) {
   sum = Math.round(sum *100) / 100;
   return sum
 }
-function insufficent(d, CID_sum) {
-  if (d > CID_sum) return "INSUFFICIENT_FUNDS"
-  if (d == CID_sum) return "CLOSED"
-  if (d > CID_sum) return "OPEN"
+function getStatus(d, s) { //compare diff, sum_Cash
+  d = parseFloat(d)
+  s = parseFloat(s)
+  if (d > s) {
+    return "INSUFFICIENT_FUNDS";
+    }
+  if (d == s) {
+    return "CLOSED";
+    }
+  if (d > s) {
+    return "OPEN"
+     } 
+
+    
 }
 function makeArr(cid)  {
  var r=  cid.map( el => dict[el[0]])
