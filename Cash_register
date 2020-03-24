@@ -6,9 +6,10 @@ function checkCashRegister(price, cash, cid) {
   var arr = makeArr(cid)
   var bool = fits(0.25, diff, cid)
   var passt_rein = []
-
-
-
+  console.log(arr)
+ 
+  var removedCID = removeValueOfNote_in_cid(0.25, cid)
+  
 }
 function fits(note, difference, cid) { //checks if value of current note fits in CID value and is less than or equal to diff
   if (note <= difference) {
