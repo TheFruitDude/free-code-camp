@@ -1,0 +1,77 @@
+function checkCashRegister(price, cash, cid) {
+
+  var diff = cash - price
+  var status = insufficent(diff, cid)
+  var sum = sum_Cash(diff, cid)
+  var arr = makeArr(cid)
+  var bool = fits(0.25, diff, cid)
+  var passt_rein = []
+
+
+
+}
+function fits(note, difference, cid) { //checks if value of current note fits in CID value and is less than or equal to diff
+  if (note <= difference) {
+    getValueOfNote_in_cid(note, cid)
+     if (note <= getValueOfNote_in_cid(note, cid)) {
+       return true
+     }
+  } 
+  return false
+}
+function getValueOfNote_in_cid(note, c) {
+  var testNote = dict[note]
+  var returnthis;
+  c.forEach( (el) => {
+    if (el[0] == testNote) {
+      returnthis = el[1]
+    }
+  })
+  return returnthis
+}
+function removeValueOfNote_in_cid(note, c) {
+var removeNote = dict[note]
+  c.forEach( (el) => {
+    if (el[0] == removeNote) {
+      el[1] -= note
+    }
+  })
+  return c
+}
+function sum_Cash(diff, c) {
+  var sum =  c.map( el => el[1]).reduce((a, b) => a + b, 0);
+  sum = Math.round(sum *100) / 100;
+  return sum
+}
+function insufficent(d, CID_sum) {
+  if (d > CID_sum) return "INSUFFICIENT_FUNDS"
+  if (d == CID_sum) return "CLOSED"
+  if (d > CID_sum) return "OPEN"
+}
+function makeArr(cid)  {
+ var r=  cid.map( el => dict[el[0]])
+ return r
+}
+
+
+var dict = {
+  "PENNY": 0.01,
+  "NICKEL":0.05,
+  "DIME":0.1,
+  "QUARTER":  0.25,
+  "ONE": 1,
+  "FIVE":5,
+  "TEN": 10,
+  "TWENTY": 20,
+  "ONE HUNDRED": 100,
+  0.01: "PENNY",
+  0.05: "NICKEL",
+  0.1: "DIME",
+  0.25: "QUARTER",
+  1: "ONE",
+  5: "FIVE",
+  10: "TEN",
+  20: "TWENTY",
+  100: "ONE HUNDRED"
+}
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
