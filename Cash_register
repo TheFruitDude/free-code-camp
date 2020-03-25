@@ -1,38 +1,88 @@
 function checkCashRegister(price, cash, cid) {
 
   var diff = cash - price
-  var sum = sum_Cash(diff, cid)
+  var sum = sum_Cash(cid)
   var status = getStatus(diff, sum)
-  console.log(status)
-
-  var arr = makeArr(cid)
-  var bool = fits(0.25, diff, cid)
+  var arr = makeArr(cid).reverse()
+  var bool = fits(0.25, diff, cid) //
   var passt_rein = []
- 
- 
-  var removedCID = removeValueOfNote_in_cid(0.25, cid)
+  //console.log(cid)
+  for ( let u = 0; u < arr.length; u++) {
+    var test = arr[u]; //begin with highest note in cid
+   var anotherArray = [] 
+    
+    while (fits(test, diff, cid)) {
+         var lastArray = []
+        lastArray.push(dict[test])
+        lastArray.push(test)
+        
+        if (isNaN(lastArray[0])) {
+          anotherArray.push(lastArray)
+        }
+        
+        diff -= test
+        cid = removeValueOfNote_in_cid(test, cid)
+    }
+
+
+   var summe = anotherArray.map( el => el[1]).reduce((a, b) => a + b, 0); //gets all elements at index 1 and sums them
+  findDuplicates(anotherArray)
+
+
+  }
+
 
 
  if (status == "INSUFFICIENT_FUNDS") {
     passt_rein = []
   }
 }
-function loopbackwards() {
+
+function findDuplicates(arr) {
+  var zwArr = [] //like arr but no duplicates
+  var howmany = []
+
+ for ( let i= 0; i < arr.length; i++) {
+   //console.log(zwArr)
+   //console.log(how_many_in_Arr(arr[i], zwArr))
+
+   if (how_many_in_Arr(arr[i], zwArr) == 0) {
+     zwArr.push(arr[i])
+   }
+ }
+//console.log(zwArr)
+ for ( let i= 0; i < zwArr.length; i++) {
+   howmany[i] = how_many_in_Arr(zwArr[i], arr)
+  zwArr[i][1] = howmany[i] * zwArr[i][1]
+ }
+return zwArr;
+}
+function how_many_in_Arr(element, arr) {
+  var count = 0;
+  arr.forEach( (el)=> {
+    if (el == element) {
+      count++;
+    }
+  })
+  return count;
+}
+
+function loop() { // main idea on how to solve this problem
     /*pseudecode:
-  for-loop arr backwards {
-    while fits && getValueOfNote_in_cid != 0
-      push test_note to array
-      maybe Math.round
-      subrtact value from array cid
-      subtract value from varialbe diff and assign returned CID to currentCID
+  for-loop (note) {
+  var test = arr[u]
+    while fits(note, diff, cid):
+      Math.round?
+      push test to array
+      subtract value from cid array
+      subtract value from var diff and assign returned CID to currentCID with removeValueOfNote_in_cid
   }
   console.log(passt_rein)
   */
 }
-function fits(note, difference, cid) { //checks if value of current note fits in CID value and is less than or equal to diff
+function fits(note, difference, cid) { //checks if we have this note in CID, so that we can return it to customer and checks if value of that note is less than or equal to diff which is the amount of money we have to return at this point
   if (note <= difference) {
-    getValueOfNote_in_cid(note, cid)
-     if (note <= getValueOfNote_in_cid(note, cid)) {
+     if (note <= getValueOfNote_in_cid(note, cid)) {       
        return true
      }
   } 
@@ -57,9 +107,10 @@ var removeNote = dict[note]
   })
   return c
 }
-function sum_Cash(diff, c) {
-  var sum =  c.map( el => el[1]).reduce((a, b) => a + b, 0);
+function sum_Cash(c) {
+  var sum =  c.map( el => el[1]).reduce((a, b) => a + b, 0); //gets all elements at index 1 and sums them, returns that value
   sum = Math.round(sum *100) / 100;
+  
   return sum
 }
 function getStatus(d, s) { //compare diff, sum_Cash
@@ -71,11 +122,9 @@ function getStatus(d, s) { //compare diff, sum_Cash
   if (d == s) {
     return "CLOSED";
     }
-  if (d > s) {
+  if (d < s) {
     return "OPEN"
-     } 
-
-    
+    }   
 }
 function makeArr(cid)  {
  var r=  cid.map( el => dict[el[0]])
@@ -103,4 +152,13 @@ var dict = {
   20: "TWENTY",
   100: "ONE HUNDRED"
 }
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+
+/*thoughts:
+there could be multiple solutions
+-functional programing is the way to go 
+-get some more caffeine
+
+
+*/
