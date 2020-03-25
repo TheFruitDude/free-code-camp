@@ -1,0 +1,141 @@
+function checkCashRegister(price, cash, cid) {
+
+  var diff = cash - price
+  var sum = sum_Cash(cid)
+  var status = getStatus(diff, sum)
+  var arr = makeArr(cid).reverse()
+  var bool = fits(0.25, diff, cid) //
+  var passt_rein = []
+  //console.log(cid)
+  for ( let u = 0; u < arr.length; u++) {
+    var test = arr[u]; //begin with highest note in cid
+   var anotherArray = [] 
+    
+    while (fits(test, diff, cid)) {
+         var lastArray = []
+        lastArray.push(dict[test])
+        lastArray.push(test)
+        
+        if (isNaN(lastArray[0])) {
+          anotherArray.push(lastArray)
+        }
+        
+        diff -= test
+        cid = removeValueOfNote_in_cid(test, cid)
+    }
+
+
+   var summe = anotherArray.map( el => el[1]).reduce((a, b) => a + b, 0); //gets all elements at index 1 and sums them
+  console.log(anotherArray)
+
+  }
+
+
+
+ if (status == "INSUFFICIENT_FUNDS") {
+    passt_rein = []
+  }
+}
+function simple_sum(a) {
+  var c;
+  a.forEach( (el)=> {
+    c += el
+  })
+  return c
+}
+
+function loop() { // main idea on how to solve this problem
+    /*pseudecode:
+  for-loop (note) {
+  var test = arr[u]
+    while fits(note, diff, cid):
+      Math.round?
+      push test to array
+      subtract value from cid array
+      subtract value from var diff and assign returned CID to currentCID with removeValueOfNote_in_cid
+  }
+  console.log(passt_rein)
+  */
+}
+function fits(note, difference, cid) { //checks if we have this note in CID, so that we can return it to customer and checks if value of that note is less than or equal to diff which is the amount of money we have to return at this point
+  if (note <= difference) {
+     if (note <= getValueOfNote_in_cid(note, cid)) {       
+       return true
+     }
+  } 
+  return false
+}
+function getValueOfNote_in_cid(note, c) {
+  var testNote = dict[note]
+  var returnthis;
+  c.forEach( (el) => {
+    if (el[0] == testNote) {
+      returnthis = el[1]
+    }
+  })
+  return returnthis
+}
+function removeValueOfNote_in_cid(note, c) {
+var removeNote = dict[note]
+  c.forEach( (el) => {
+    if (el[0] == removeNote) {
+      el[1] -= note
+    }
+  })
+  return c
+}
+function sum_Cash(c) {
+  var sum =  c.map( el => el[1]).reduce((a, b) => a + b, 0); //gets all elements at index 1 and sums them, returns that value
+  sum = Math.round(sum *100) / 100;
+  
+  return sum
+}
+function getStatus(d, s) { //compare diff, sum_Cash
+  d = parseFloat(d)
+  s = parseFloat(s)
+  if (d > s) {
+    return "INSUFFICIENT_FUNDS";
+    }
+  if (d == s) {
+    return "CLOSED";
+    }
+  if (d < s) {
+    return "OPEN"
+    }   
+}
+function makeArr(cid)  {
+ var r=  cid.map( el => dict[el[0]])
+ return r
+}
+
+
+var dict = {
+  "PENNY": 0.01,
+  "NICKEL":0.05,
+  "DIME":0.1,
+  "QUARTER":  0.25,
+  "ONE": 1,
+  "FIVE":5,
+  "TEN": 10,
+  "TWENTY": 20,
+  "ONE HUNDRED": 100,
+  0.01: "PENNY",
+  0.05: "NICKEL",
+  0.1: "DIME",
+  0.25: "QUARTER",
+  1: "ONE",
+  5: "FIVE",
+  10: "TEN",
+  20: "TWENTY",
+  100: "ONE HUNDRED"
+}
+
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+
+/*thoughts:
+there could be multiple solutions
+-functional programing is the way to go 
+-get some more caffeine
+
+
+*/
