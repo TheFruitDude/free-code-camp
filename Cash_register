@@ -24,50 +24,52 @@ function checkCashRegister(price, cash, cid) {
         cid = removeValueOfNote_in_cid(test, cid)
     }
 
-
-   var summe = anotherArray.map( el => el[1]).reduce((a, b) => a + b, 0); //gets all elements at index 1 and sums them
-  findDuplicates(anotherArray)
+  if (findDuplicates(anotherArray)) passt_rein.push(findDuplicates(anotherArray))
 
 
   }
-
-
 
  if (status == "INSUFFICIENT_FUNDS") {
     passt_rein = []
   }
+  var obj = {}
+  obj.status =  status
+  obj.change = passt_rein
+console.log(obj)
+return obj
+
 }
-
+function arr_contains_zero(arr) {
+  arr.forEach( (e) => {
+    if (e == 0) {
+      return true
+    }
+  })
+  return false
+}
 function findDuplicates(arr) {
-
   //this function basically has to remove all duplicates an return the clean array
   var zwArr = [] //like arr but no duplicates
 
  for ( let i= 0; i < arr.length; i++) {
     if (how_many_in_Arr(arr[i], zwArr) == 0) { //just simply remove the empty  fields
-      if (!(arr[i].length == 0)) {
-        zwArr.push(arr[i])
-      }    
-     console.log(zwArr[i])
+       if (Array.isArray(arr[i])) {
+         if (!(arr_contains_zero(arr[i]))) {
+            zwArr.push(arr[i])
+         }     
+      }   
     }
  }
-
- var asdf = []
   var sum = sumAllNumbers(zwArr)
-//console.log(sum)
 
- for ( let i= 0; i < zwArr.length; i++) {
-   if (JSON.stringify(zwArr[i]) == JSON.stringify(zwArr[i-1])) {
-    
-   } else {
-     //then we have a new one
-     asdf.push(zwArr[i])
-   }   
- }
- asdf = asdf.flat()
-//the plan was to count how many times for ex "TWENTY" , then just multiplicate that value with dict[TWENTY]
+  if (sum == 0) return undefined
+  zwArr = zwArr.flat()
+  var text = zwArr[0]
+  var r =[]
+  r.push(text)
+  r.push(sum)
 
-return zwArr;
+return r;
 }
 function sumAllNumbers(arr) {
   var sum = 0;
@@ -94,19 +96,7 @@ function how_many_in_Arr(element, arr) {
   return count;
 }
 
-function loop() { // main idea on how to solve this problem
-    /*pseudecode:
-  for-loop (note) {
-  var test = arr[u]
-    while fits(note, diff, cid):
-      Math.round?
-      push test to array
-      subtract value from cid array
-      subtract value from var diff and assign returned CID to currentCID with removeValueOfNote_in_cid
-  }
-  console.log(passt_rein)
-  */
-}
+
 function fits(note, difference, cid) { //checks if we have this note in CID, so that we can return it to customer and checks if value of that note is less than or equal to diff which is the amount of money we have to return at this point
   if (note <= difference) {
      if (note <= getValueOfNote_in_cid(note, cid)) {       
@@ -141,8 +131,11 @@ function sum_Cash(c) {
   return sum
 }
 function getStatus(d, s) { //compare diff, sum_Cash
+
   d = parseFloat(d)
   s = parseFloat(s)
+  console.log(d)
+   console.log(s)
   if (d > s) {
     return "INSUFFICIENT_FUNDS";
     }
@@ -180,7 +173,7 @@ var dict = {
   100: "ONE HUNDRED"
 }
 
-checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
 
 /*thoughts:
 there could be multiple solutions
