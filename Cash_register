@@ -39,29 +39,56 @@ function checkCashRegister(price, cash, cid) {
 }
 
 function findDuplicates(arr) {
+
+  //this function basically has to remove all duplicates an return the clean array
   var zwArr = [] //like arr but no duplicates
-  var howmany = []
 
  for ( let i= 0; i < arr.length; i++) {
-   //console.log(zwArr)
-   //console.log(how_many_in_Arr(arr[i], zwArr))
+    if (how_many_in_Arr(arr[i], zwArr) == 0) { //just simply remove the empty  fields
+      if (!(arr[i].length == 0)) {
+        zwArr.push(arr[i])
+      }    
+     console.log(zwArr[i])
+    }
+ }
 
-   if (how_many_in_Arr(arr[i], zwArr) == 0) {
-     zwArr.push(arr[i])
-   }
- }
-//console.log(zwArr)
+ var asdf = []
+  var sum = sumAllNumbers(zwArr)
+//console.log(sum)
+
  for ( let i= 0; i < zwArr.length; i++) {
-   howmany[i] = how_many_in_Arr(zwArr[i], arr)
-  zwArr[i][1] = howmany[i] * zwArr[i][1]
+   if (JSON.stringify(zwArr[i]) == JSON.stringify(zwArr[i-1])) {
+    
+   } else {
+     //then we have a new one
+     asdf.push(zwArr[i])
+   }   
  }
+ asdf = asdf.flat()
+//the plan was to count how many times for ex "TWENTY" , then just multiplicate that value with dict[TWENTY]
+
 return zwArr;
+}
+function sumAllNumbers(arr) {
+  var sum = 0;
+  arr.forEach((el)=> {
+    sum += el[1]
+  })
+  return sum;
 }
 function how_many_in_Arr(element, arr) {
   var count = 0;
   arr.forEach( (el)=> {
+    if (Array.isArray(el)) {
+        el.forEach( (e) => {
+           if (el == element) {
+              count++;
+            }
+        })
+    } else {
     if (el == element) {
-      count++;
+       count++;
+      }
     }
   })
   return count;
