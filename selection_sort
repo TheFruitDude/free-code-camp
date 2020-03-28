@@ -1,0 +1,20 @@
+ function selectionSort(arr) {
+
+const len = arr.length 
+
+  for (let i = 0 ; i < len; i++) {
+    var indexOfmin = i; //Check min of the rest of the array, because  the part of the arr which we already sorted will be ignored
+    for (let j = i + 1; j < len; j++)  {
+        if (arr[j] < arr[indexOfmin]) indexOfmin = j
+    }
+   
+    if (i !== indexOfmin) {
+      //swap
+     ([ arr[i],  arr[indexOfmin] ] = [ arr[indexOfmin], arr[i] ]);    
+    }
+  }
+return arr;
+}
+
+
+selectionSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
