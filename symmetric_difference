@@ -1,0 +1,44 @@
+function sym(args) {
+var arr = []
+var list_of_all = []
+
+for ( let i = 0; i < arguments.length; i++) {
+  if (Array.isArray(arguments[i])) {
+   list_of_all =  list_of_all.concat(arguments[i])
+  }
+}
+
+
+list_of_all.forEach( (el) => {
+   if (!(in_both(arguments[0], arguments[1], el))) {
+     if (!(arr.includes(el))) arr.push(el)
+   }
+})
+
+ 
+  return arr
+  
+
+}
+function in_both(arr1, arr2, to_test) {
+  var infirst = false
+  var insecond = false
+  arr1.forEach( (el) => {
+    if (el == to_test) {
+      
+      infirst = true
+    }
+  })
+  arr2.forEach( ( el) => {
+      if (el == to_test) {
+      
+      insecond = true
+    }
+  })
+
+ if (infirst == true && insecond == true) {
+   return true
+ } else return false
+}
+
+sym([1, 2, 3, 3], [5, 2, 1, 4])
